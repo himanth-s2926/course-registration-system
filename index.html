@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SR University | Course Registration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="logo">SR <span>UNIVERSITY</span></div>
+    <div class="nav-links">
+        <a href="#" onclick="showPage('home')">Home</a>
+        <a href="#" onclick="showPage('courses')">Courses</a>
+        <a href="#" onclick="showPage('mycourses')">My Courses</a>
+        <a href="#" id="adminLink" onclick="showPage('admin')" hidden>Admin</a>
+    </div>
+    <div class="nav-actions">
+        <span id="userName">Guest</span>
+        <button id="loginBtn" onclick="showPage('login')">Login</button>
+        <button id="logoutBtn" onclick="logout()" hidden>Logout</button>
+    </div>
+</nav>
+
+<!-- HOME PAGE -->
+<section id="home" class="page active">
+    <div class="hero">
+        <div class="hero-content">
+            <p class="tag">WELCOME TO SR UNIVERSITY</p>
+            <h1>Shape Your Future<br>With The Right Courses.</h1>
+            <p>Explore courses, choose your subjects and build
+               your academic journey with us.</p>
+            <button onclick="showPage('courses')">
+                Explore Courses →
+            </button>
+        </div>
+    </div>
+
+    <div class="stats">
+        <div><h2 id="courseCount">0</h2><p>Available Courses</p></div>
+        <div><h2>100+</h2><p>Expert Faculty</p></div>
+        <div><h2>5000+</h2><p>Students</p></div>
+    </div>
+</section>
+
+<!-- COURSES PAGE -->
+<section id="courses" class="page container">
+    <div class="heading">
+        <p class="tag">EXPLORE LEARNING</p>
+        <h1>Available Courses</h1>
+        <p>Choose the right course for your career.</p>
+    </div>
+
+    <input type="text" id="searchInput"
+        placeholder="Search courses by name..."
+        oninput="renderCourses()">
+
+    <div id="courseList" class="course-grid"></div>
+</section>
+
+<!-- MY COURSES PAGE -->
+<section id="mycourses" class="page container">
+    <div class="heading">
+        <p class="tag">YOUR LEARNING JOURNEY</p>
+        <h1>My Registered Courses</h1>
+        <p>View all the courses you have enrolled in.</p>
+    </div>
+    <div id="myCourseList" class="course-grid"></div>
+</section>
+
+<!-- LOGIN PAGE -->
+<section id="login" class="page auth-page">
+    <div class="auth-card">
+        <h1>Welcome Back!</h1>
+        <p>Login to your student account</p>
+
+        <form onsubmit="login(event)">
+            <label>Email Address</label>
+            <input type="email" id="loginEmail" required
+                placeholder="Enter email">
+
+            <label>Password</label>
+            <input type="password" id="loginPassword"
+                required placeholder="Enter password">
+
+            <button type="submit">Login</button>
+        </form>
+
+        <p>Don't have an account?
+            <a href="#" onclick="showPage('register')">Register</a>
+        </p>
+
+        <p class="hint">Demo Admin: admin@sruni.edu / admin123</p>
+    </div>
+</section>
+
+<!-- REGISTER PAGE -->
+<section id="register" class="page auth-page">
+    <div class="auth-card">
+        <h1>Create Account</h1>
+        <p>Join SR University today</p>
+
+        <form onsubmit="registerUser(event)">
+            <label>Full Name</label>
+            <input type="text" id="regName" required
+                placeholder="Enter your name">
+
+            <label>Email Address</label>
+            <input type="email" id="regEmail" required
+                placeholder="Enter email">
+
+            <label>Password</label>
+            <input type="password" id="regPassword"
+                minlength="6" required placeholder="Create password">
+
+            <button type="submit">Create Account</button>
+        </form>
+
+        <p>Already registered?
+            <a href="#" onclick="showPage('login')">Login</a>
+        </p>
+    </div>
+</section>
+
+<!-- ADMIN PAGE -->
+<section id="admin" class="page container">
+    <div class="heading">
+        <p class="tag">ADMIN DASHBOARD</p>
+        <h1>Manage Courses</h1>
+        <p>Add, update and remove available courses.</p>
+    </div>
+
+    <div class="admin-form">
+        <h2 id="formHeading">Add New Course</h2>
+
+        <form onsubmit="saveCourse(event)">
+            <input type="hidden" id="editId">
+
+            <label>Course Name</label>
+            <input id="courseName" required
+                placeholder="Enter course name">
+
+            <label>Description</label>
+            <textarea id="courseDescription" required
+                placeholder="Enter description"></textarea>
+
+            <label>Duration</label>
+            <input id="courseDuration" required
+                placeholder="Example: 3 Months">
+
+            <button type="submit">Save Course</button>
+            <button type="button" class="secondary"
+                onclick="resetCourseForm()">Clear</button>
+        </form>
+    </div>
+
+    <div id="adminCourseList" class="admin-list"></div>
+</section>
+
+<footer>
+    <h2>SR UNIVERSITY</h2>
+    <p>Empowering Students Through Education.</p>
+    <p>© 2026 SR University. All Rights Reserved.</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
